@@ -1,0 +1,39 @@
+<ng-template cxOutletRef="PDP.SUMMARY" let-model>
+  <pre>AAAAAAADDDDD</pre>
+</ng-template>
+
+<ng-template cxOutletRef="SiteLogo" let-model>
+  <img src="https://picsum.photos/200/100" />
+</ng-template>
+
+<ng-template cxOutletRef="PDP.PRICE" let-model>
+  <code>100000mln</code>
+</ng-template>
+
+<ng-template cxOutletRef="PDP.STOCK" let-model>
+  <pre>{{ stock.stockLevelStatus }}</pre>
+</ng-template>
+
+<ng-template cxOutletRef="MiniCart">
+  <a
+    class="minicart"
+    (mouseenter)="showCartEntries = true"
+    (mouseleave)="showCartEntries = false"
+    aria-label="{(cartEntries$ | async)?.length} item currently in your cart"
+    href="/electronics-spa/en/USD/cart"
+  >
+    <span class="cx-icon fas fa-shopping-cart"></span>
+    <span class="count">
+      {{
+        (cartEntries$ | async)?.length === 0
+          ? 0
+          : (cartEntries$ | async)?.length
+      }}
+    </span>
+  </a>
+  <div class="minicart-entries" *ngIf="showCartEntries">
+    <ul class="minicart-entries--list" *ngFor="let entries of (cartEntries$ | async)">
+        <li> {{ entries['product']['name'] }} - {{ entries['totalPrice']['formattedValue'] }}</li>
+    </ul>
+  </div>
+</ng-template>

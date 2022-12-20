@@ -5,6 +5,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { AppRoutingModule } from "@spartacus/storefront";
 import { AppComponent } from './app.component';
+import { MyOutletsModule } from "./my-outlets/my-outlets.module";
 import { SpartacusModule } from './spartacus/spartacus.module';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SpartacusModule } from './spartacus/spartacus.module';
     AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    SpartacusModule
+    SpartacusModule,
+    MyOutletsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
