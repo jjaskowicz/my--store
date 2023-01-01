@@ -1,0 +1,6 @@
+<div class="product">
+    <cx-product-list-item
+        *ngIf="product$ | async"
+        [product]="product$ | async"
+    ></cx-product-list-item>
+</div>
