@@ -50,3 +50,26 @@ header {
         }
     }
 }
+
+.stock-notification {
+    font-size: var(--cx-font-size, 0.875rem);
+    font-weight: var(--cx-font-weight-normal);
+    line-height: var(--cx-line-height, 1.2222222222);
+    color: var(--cx-color-secondary);
+    padding: 0 20px;
+}
+
+.PreHeader {
+    width: calc(100% + 20px);
+    margin: 0 -10px;
+}
+.covid {
+    display: block;
+    width: 100%;
+    height: 44px;
+    background-color: bisque;
+    text-align: center;
+    font-size: 14px;
+    line-height: 44px;
+    color: coral;
+}

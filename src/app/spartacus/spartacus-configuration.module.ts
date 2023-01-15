@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { translationChunksConfig, translations } from "@spartacus/assets";
-import { FeaturesConfig, I18nConfig, OccConfig, provideConfig, SiteContextConfig } from "@spartacus/core";
+import { ConfigModule, FeaturesConfig, I18nConfig, OccConfig, provideConfig, SiteContextConfig } from "@spartacus/core";
 import { defaultCmsContentProviders, layoutConfig, mediaConfig } from "@spartacus/storefront";
 
 @NgModule({
   declarations: [],
   imports: [
+    ConfigModule.withConfig({
+      // routing: {
+      //   protected: true,
+      // },
+      checkout: {
+        guest: true
+      },
+  })
   ],
   providers: [provideConfig(layoutConfig), provideConfig(mediaConfig), ...defaultCmsContentProviders, provideConfig(<OccConfig>{
     backend: {
@@ -28,6 +36,16 @@ import { defaultCmsContentProviders, layoutConfig, mediaConfig } from "@spartacu
     features: {
       level: '4.3'
     }
-  })]
+  }),
+  provideConfig({
+    view: {
+      infiniteScroll: {
+        active: true,
+        productLimit: 5,
+        showMoreButton: true,
+      },
+    }
+  })
+]
 })
 export class SpartacusConfigurationModule { }

@@ -1,0 +1,12 @@
+.upselling {
+    padding: 50px;
+    ::ng-deep.carousel-panel {
+        button {
+            padding: 0 30px;
+        }
+
+        .slides .slide .item {
+            padding: 0 20px;
+        }
+    }
+}

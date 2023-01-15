@@ -11,12 +11,10 @@ import { switchMap, tap } from 'rxjs/operators';
 export class Section1Component implements OnInit {
 
   subscription: Subscription = new Subscription;
-  isLoading: boolean = false;
-  isStopped: boolean = true;
   code = '';
   product$: BehaviorSubject<Product> = new BehaviorSubject<Product>({});
 
-  productCodes = ['553637', '358639']
+  productCodes = ['553637', '358639'];
   
   constructor(private productService: ProductService) { }
 

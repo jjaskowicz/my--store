@@ -1,0 +1,9 @@
+<ng-container *ngIf="imageList$ | async as imageList">
+    <div class="shot-with">
+        <div class="pics" *ngFor="let image of imageList">
+            <img [src]="image.download_url" alt="" />
+            <p>{{ image.author }}</p>
+        </div>
+    </div>
+</ng-container>
+

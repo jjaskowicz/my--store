@@ -1,5 +1,7 @@
 <ng-template cxOutletRef="SiteLogo" let-model>
-    <img src="https://picsum.photos/200/100" />
+    <a routerLink="">
+        <img src="https://picsum.photos/200/100" />
+    </a>
 </ng-template>
 
 <ng-template cxOutletRef="PDP.SUMMARY" let-model>
@@ -8,7 +10,12 @@
 
 <ng-template cxOutletRef="PDP.PRICE" let-model>
   <code>100000 mln ($)</code>
+  <p>{{ (stock$ | async)?.tags }}</p>
 </ng-template>
+
+<!-- <ng-template cxOutletRef="PDP.PRICE" cxOutletPos="after" let-model>
+    <code>100000 mln ($)</code>
+</ng-template> -->
 
 <ng-template cxOutletRef="PDP.STOCK" let-model>
   <pre>{{ (stock$ | async)?.stock?.stockLevelStatus }}</pre>
@@ -27,7 +34,7 @@
       {{
         (cartEntries$ | async)?.totalItems === 0
           ? 0
-          : (cartEntries$ | async)?.totalItems
+          : (cartEntries$ | async)?.totalUnitCount
       }}
     </span>
   </a>
@@ -36,4 +43,19 @@
         <li> {{ entries?.product?.name }} - {{ entries?.totalPrice?.formattedValue }}</li>
     </ul>
   </div>
+</ng-template>
+
+
+
+<!-- ----- -->
+
+<ng-template cxOutletRef="StockNotificationComponent" let-model>
+    <div class="stock-notification">{{ (stockNotification$ | async)?.[0] }} item(s) already in cart</div>
+</ng-template>
+
+
+<ng-template *ngIf="config.isCovid" cxOutletRef="PreHeader" let-model>
+    <div class="covid">
+        Covid warning.
+    </div>
 </ng-template>
