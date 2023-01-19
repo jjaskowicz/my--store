@@ -11,16 +11,17 @@ import {
 } from '@spartacus/storefront';
 import { BannerComponent } from './banner/banner.component';
 import { Section1Component } from './section1/section1.component';
-import {
-  provideConfig,
-  UrlModule,
-} from '@spartacus/core';
+import { ConfigModule, provideConfig, UrlModule } from '@spartacus/core';
 import { UpsellingComponent } from './upselling/upselling.component';
 import { ReorderComponent } from './reorder/reorder.component';
 import { RouterModule } from '@angular/router';
 import { ShotWithComponent } from './shot-with/shot-with.component';
 import { ShotWithService } from './shot-with/shot-with.service';
-import { CovidConfig } from '../configs/covid.config';
+import { ConfigDebugEnum, MyCustomConfig } from '../configs/covid.config';
+import { ConfigDebugComponent } from './config-debug/config-debug.component';
+import { RecentylViewedComponent } from './recentyl-viewed/recentyl-viewed.component';
+import { RecentylBoughtComponent } from './recentyl-bought/recentyl-bought.component';
+import { AutoLogoutService } from '../services/auto-logout.service';
 
 const COMPONENTS = [
   MyOutletsComponent,
@@ -28,12 +29,14 @@ const COMPONENTS = [
   Section1Component,
   UpsellingComponent,
   ReorderComponent,
-  ShotWithComponent
+  ShotWithComponent,
+  ConfigDebugComponent,
+  RecentylViewedComponent,
 ];
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, RecentylBoughtComponent],
   imports: [
     CommonModule,
     OutletRefModule,
@@ -41,11 +44,12 @@ const COMPONENTS = [
     CarouselModule,
     MediaModule,
     UrlModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [...COMPONENTS],
   providers: [
     ShotWithService,
+    AutoLogoutService,
     provideOutlet({
       id: 'Section1',
       component: Section1Component,
@@ -56,7 +60,6 @@ const COMPONENTS = [
       component: UpsellingComponent,
       position: OutletPosition.REPLACE,
     }),
-    
 
     provideOutlet({
       id: 'AccountOrderDetailsActionsComponent',
@@ -64,15 +67,32 @@ const COMPONENTS = [
       position: OutletPosition.AFTER,
     }),
 
-
     provideOutlet({
       id: 'ProductDetailsPageTemplate',
       component: ShotWithComponent,
       position: OutletPosition.AFTER,
     }),
+
     provideConfig({
       isCovid: false,
-    } as CovidConfig)
+    } as MyCustomConfig),
+
+    provideOutlet({
+      id: 'cx-footer',
+      component: ConfigDebugComponent,
+      position: OutletPosition.AFTER,
+    }),
+
+    provideOutlet({
+      id: 'Section2C',
+      component: RecentylViewedComponent,
+      position: OutletPosition.AFTER,
+    }),
+    provideOutlet({
+      id: 'CartPageTemplate',
+      component: RecentylBoughtComponent,
+      position: OutletPosition.AFTER,
+    }),
   ],
 })
 export class MyOutletsModule {}

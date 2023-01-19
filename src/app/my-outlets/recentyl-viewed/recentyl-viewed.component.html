@@ -1,10 +1,11 @@
-<div class="upselling">
+<div class="recently-viewed">
+  <div class="recently-viewed-title">Recently Viewed</div>
   <cx-carousel
     *ngIf="items$ | async as items"
     role="region"
     [items]="items"
     [template]="carouselItem"
-    itemWidth="285px"
+    itemWidth="200px"
   >
   </cx-carousel>
 

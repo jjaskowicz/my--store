@@ -10,6 +10,7 @@ import {
 import { CurrentProductService } from '@spartacus/storefront';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AutoLogoutService } from 'src/app/services/auto-logout.service';
 
 
 declare module '@spartacus/core' {
@@ -33,12 +34,17 @@ export class MyOutletsComponent implements OnInit {
   stockNotification$!: Observable<any>;
   currentProductName!: string;
 
+  foo = "foo"
+
   constructor(
     private currentProduct: CurrentProductService,
     private activeCartService: ActiveCartService,
+    private autoLogoutService: AutoLogoutService,
     protected productService: ProductService,
-    public config: Config
-  ) {}
+    public config: Config,
+  ) {
+    this.foo = autoLogoutService.value;
+  }
 
   ngOnInit(): void {
 
