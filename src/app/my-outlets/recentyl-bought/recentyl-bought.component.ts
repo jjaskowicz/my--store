@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ActiveCartService,
+  Product,
+  ProductService,
   RoutingService,
   UserOrderService,
 } from '@spartacus/core';
 import { OrderService } from '@spartacus/order/core';
 import { OrderFacade } from '@spartacus/order/root';
 import { OrderDetailsService } from '@spartacus/storefront';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recentyl-bought',
@@ -15,24 +18,27 @@ import { Observable } from 'rxjs';
   styleUrls: ['./recentyl-bought.component.scss'],
 })
 export class RecentylBoughtComponent implements OnInit {
-  order$: Observable<any> = this.orderDetailsService.getOrderDetails();
-  order2$: Observable<any> = this.userOrderService.getOrderHistoryList(0);
-  order3$: Observable<any> = this.orderService.getOrderHistoryList(1);
+  order$: Observable<any> = this.orderService.getOrderHistoryList(1);
+  items$!: Observable<Observable<Product | null>[]>;
 
   constructor(
-    private userOrderService: UserOrderService,
-    private activeCartService: ActiveCartService,
-    private routingService: RoutingService,
-    protected orderDetailsService: OrderDetailsService,
+    // private activeCartService: ActiveCartService,
+    // private routingService: RoutingService,
+    private productService: ProductService,
     protected orderService: OrderFacade
   ) {}
 
   ngOnInit(): void {
-    // this.order$.subscribe((e) => {
-    //   console.log(e);
-    // });
-    this.order3$.subscribe((e) => {
-      console.log(e);
-    });
+    this.order$
+      .pipe(
+        switchMap((res) =>
+          res.orders.map((order: any) => {
+            return this.productService.get(order.code).subscribe((e: any) => {
+              console.log(e);
+            });
+          })
+        )
+      )
+      .subscribe();
   }
 }

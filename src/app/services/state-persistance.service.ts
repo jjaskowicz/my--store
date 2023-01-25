@@ -11,7 +11,7 @@ export enum StorageKey {
 })
 export class StatePersistanceService {
   product: Product[] = [];
-  constructor(private foo: StatePersistanceService) {}
+  constructor() {}
 
   getProducts(storageKey: string) {
     return localStorage.getItem(`${storageKey}`);

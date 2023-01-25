@@ -1,0 +1,32 @@
+:host {
+    margin-bottom: 60px;
+}
+.recently-bought {
+    height: 200px;
+    margin: 50px 30px;
+    &-title {
+        font-size: var(--cx-font-size, 1.375rem);
+        font-weight: var(--cx-font-weight-semi);
+        line-height: var(--cx-line-height, 1.2222222222);
+        font-weight: bold;
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .item a {
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        .cx-product-name {
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        cx-media {
+            display: flex;
+            justify-content: center;
+        }
+        img {
+            max-height: 150px;
+        }
+    }
+}
